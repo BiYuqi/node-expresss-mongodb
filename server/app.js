@@ -2,9 +2,9 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const index = require('./router/index')
-const product = require('./router/product')
-const system = require('./router/system')
-const upload = require('./router/upload')
+const product = require('./routes/product')
+const system = require('./routes/system')
+const upload = require('./routes/upload')
 const app = express()
 
 app.use(session({
