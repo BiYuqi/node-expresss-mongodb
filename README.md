@@ -1,5 +1,5 @@
 <p align="center">
-  Vue-admin-template
+  node-expresss-mongodb
 </p>
 
 <p align="center">
@@ -49,9 +49,14 @@ const service = axios.create({
 ```
 
 ### 连接MongoDB
-<a href="http://www.runoob.com/mongodb/mongodb-window-install.html">请自行安装下载mongodb</a>
+<a href="http://www.runoob.com/mongodb/mongodb-window-install.html">请自行安装下载mongodb</a> <br/>
 <a href="http://www.runoob.com/mongodb/mongodb-connections.html">连接mongodb</a>
 
 ### 问题
-* 项目使用np i 安装依赖后，你npm run dev 可能会报错，这个时候需要 npm i node-sass sass-loader -D 来解决依赖问题
+* 项目使用npm i 安装依赖后，你npm run dev 可能会报错，这个时候需要 npm i node-sass sass-loader -D 来解决依赖问题
 * supervisor 必须全局安装才可以 npm i supervisor -g
+
+### TODO
+
+[ ] 拆分api,增加controllers模块
+
