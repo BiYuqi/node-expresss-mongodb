@@ -44,7 +44,7 @@ npm run build
 const BASE_URL = 'http://localhost:7085'
 const service = axios.create({
   baseURL: BASE_URL,
-  timeout: 10000
+  timeout: 20000
 })
 ```
 
