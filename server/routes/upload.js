@@ -7,9 +7,7 @@ const storage = multer.diskStorage({
     cb(null, 'upload/')
   },
   filename: function (req, file, cb) {
-    const fileType = file.originalname.match(/\.(\w+)$/)[1]
-    console.log(file.fieldname + '-' + Date.now() + '.' + fileType)
-    cb(null, file.fieldname + '-' + Date.now() + '.' + fileType)
+    cb(null, file.fieldname + '-' + Date.now() + '-' + file.originalname)
   }
 })
 const BaseUpload = multer({
