@@ -10,7 +10,7 @@
         :on-success="handleSuccess"
         :on-remove="handleRemove"
         :file-list="formList.fileList"
-        name="goods"
+        name="GOODS"
         list-type="picture">
         <el-button size="small" type="primary">点击上传</el-button>
         <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
@@ -70,14 +70,14 @@ export default {
             this.$refs[formName].resetFields()
           })
         } else {
-          return false;
+          return false
         }
       })
     },
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
+    handleRemove (file, fileList) {
+      console.log(file, fileList)
     },
-    handleSuccess(response, file, fileList) {
+    handleSuccess (response, file, fileList) {
       this.formList.fileList.push({
         name: response.data.originalname,
         path: response.data.path

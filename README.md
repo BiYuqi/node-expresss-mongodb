@@ -33,7 +33,16 @@ npm run dev
 # build for production with minification
 npm run build
 ```
-
+### server架构
+```html
+server
+  ---config 系统配置
+  ---constrollers 业务逻辑
+  ---models 数据模型(db)
+  ---routes 路由api
+  ---upload 上传文件目录
+  ---app.js 项目入口
+```
 ### 本地起服务
 本地node服务端接口，server文件夹
 * 为本地node服务，本地npm run dev后，需要在server目录 node app 来启动本地服务，以便登录正常进行
@@ -57,6 +66,7 @@ const service = axios.create({
 * supervisor 必须全局安装才可以 npm i supervisor -g
 
 ### TODO
-
-[ ] 拆分api,增加controllers模块
+- [x] 拆分api,增加controllers模块
+- [ ] 图片上传，服务器支持七牛
+- [ ] 尝试分片上传，分类上传
 

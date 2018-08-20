@@ -54,8 +54,17 @@ export default {
     }
   },
   methods: {
+    init () {
+      findGood().then(res => {
+        this.tableData = res.data.data
+      })
+    },
     handleClick (row) {
-      this.$message.warning(`即将被删除的商品是:${row.name}----${row._id}`)
+      deleteGood({id: row._id}).then(res => {
+        console.log(res)
+        this.$message.warning(`被删除的商品是:${row.name}----${row._id}`)
+        this.init()
+      })
     },
     filterImgPath (row) {
       const base = `http://localhost:7085/`
@@ -67,9 +76,7 @@ export default {
     }
   },
   created () {
-    findGood().then(res => {
-      this.tableData = res.data.data
-    })
+    this.init()
   }
 }
 </script>

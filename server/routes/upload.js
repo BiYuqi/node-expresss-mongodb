@@ -1,5 +1,6 @@
 const express = require('express')
 const multer = require('multer')
+const Upload = require('../constrollers/upload')
 const router = express.Router()
 
 const storage = multer.diskStorage({
@@ -14,22 +15,6 @@ const BaseUpload = multer({
   storage: storage
 })
 
-router.post('/upload', BaseUpload.single('goods'), (req, res) => {
-  const file = req.file
-  const size = file.size
-  const path = file.path
-  const mimetype = file.mimetype
-  const originalname = file.originalname
-  res.send({
-    status: 200,
-    data: {
-      message: '上传成功',
-      size,
-      path,
-      mimetype,
-      originalname
-    }
-  })
-})
+router.post('/upload', BaseUpload.single('GOODS'), Upload.upload)
 
 module.exports = router
