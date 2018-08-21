@@ -5,16 +5,27 @@ module.exports = {
     User.find().then((user) => {
       if (user && user.length > 0) {
         for (let i = 0; i < user.length; i++) {
-          if (user[i].username === username && user[i].password === password) {
-            req.session.sessionID = username
-            res.send({
-              status: 200,
-              data: {
-                message: '登录成功',
-                userInfo: user
-              }
-            })
-            break
+          if (user[i].username === username) {
+            if (user[i].password === password) {
+              req.session.sessionID = username
+              res.send({
+                status: 200,
+                data: {
+                  message: '登录成功',
+                  userInfo: user
+                }
+              })
+              break
+            } else {
+              res.send({
+                status: 10006,
+                data: {
+                  message: '用户密码错误',
+                  userInfo: user
+                }
+              })
+              break
+            }
           }
         }
         res.send({

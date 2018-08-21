@@ -115,6 +115,10 @@ export default {
               this.dialogVisible = true
               this.$message.error(res.data.data.message)
             }
+            if (res.data.status === 10006) {
+              this.$message.error(res.data.data.message)
+              return
+            }
             if (res.data.status === 200) {
               Cookie.set('user', this.formItem.username)
               Cookie.set('role', this.userRole)

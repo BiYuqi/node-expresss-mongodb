@@ -17,14 +17,8 @@ export default {
     AppMain,
     SideBar
   },
-  mounted () {
-    // console.log(this.$router)
-  },
   created () {
     this.$store.commit('setOpenedList')
-    // this.$router.push({
-    //   name: localStorage.currentPageName
-    // })
   },
   watch: {
     '$route' (to, from) {

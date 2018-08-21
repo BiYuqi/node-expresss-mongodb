@@ -1,4 +1,8 @@
 const path = require('path')
+/**
+ *很多配置还没启用
+ 目前使用了端口还有db
+*/
 const config = {
   debug: true,
   name: 'Node+Express+MongoDB',

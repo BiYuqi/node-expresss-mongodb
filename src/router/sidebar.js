@@ -30,25 +30,25 @@ export const baseRoute = [
   {
     path: '/icon',
     title: '系统设置',
-    name: 'icon',
-    icon: 'icon',
+    name: 'bug',
+    icon: 'bug',
     component: Main,
     children: [
       {
-        path: 'class-list',
-        name: 'class-list',
-        meta: {
-          title: '用户创建'
-        },
-        component: () => import('@/views/icon-page/index.vue')
-      },
-      {
-        path: 'class-add',
-        name: 'class-add',
+        path: 'base-page',
+        name: 'base-page',
         meta: {
           title: '全局设置'
         },
-        component: () => import('@/views/icon-page/index.vue')
+        component: () => import('@/views/SettingPage/BasePage/index.vue')
+      },
+      {
+        path: 'user-page',
+        name: 'user-page',
+        meta: {
+          title: '用户创建'
+        },
+        component: () => import('@/views/SettingPage/UserPage/index.vue')
       }
     ]
   }

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-const BASE_PATH = 'mongodb://127.0.0.1:27017/nodeExpress'
-mongoose.connect(BASE_PATH)
+const CONFIG = require('../config/config')
+mongoose.connect(CONFIG.db)
 mongoose.Promise = global.Promise
 mongoose.connection.on('connected', () => {
   console.log('数据库已经连接上')
