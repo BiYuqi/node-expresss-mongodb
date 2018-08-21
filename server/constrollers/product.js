@@ -1,15 +1,30 @@
 const Product = require('../models/product')
 module.exports = {
   find: (req, res) => {
-    // 支持模糊查询
+    /**
+     * 支持分页查询
+     * 支持模糊查询
+    */
+    let start = req.query.start || 1
+    let size = req.query.size || 10
+    let skip = (start * size) - size
+    let queryName = Object.keys(req.query)
     let query = {}
-    Object.keys(req.query).forEach(item => {
-      query[item] = new RegExp(req.query[item])
-    })
-    Product.find(query).then(goods => {
-      res.send({
-        status: 200,
-        data: goods
+    for (let i = 0; i < queryName.length; i++) {
+      if (queryName[i] === 'start' || queryName[i] === 'size') {
+        continue
+      }
+      query[queryName[i]] = new RegExp(req.query[queryName[i]])
+    }
+    Product.find(query).skip(skip).limit(~~size).then(goods => {
+      Product.count(query).then(count => {
+        res.send({
+          status: 200,
+          data: {
+            list: goods,
+            total: count
+          }
+        })
       })
     }).catch(e => {
       res.send({

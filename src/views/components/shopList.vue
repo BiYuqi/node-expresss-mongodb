@@ -1,12 +1,12 @@
 <template>
   <div class="shop-list">
     <el-table
-      :data="tableData"
+      :data="tableData.list"
       style="width: 100%">
       <el-table-column
         label="商品图片">
         <template slot-scope="scope">
-          <img width="60" :src="filterImgPath(scope.row)" alt="">
+          <img width="45" height="30" :src="filterImgPath(scope.row)" alt="">
         </template>
       </el-table-column>
       <el-table-column
@@ -43,6 +43,13 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination
+      background
+      @current-change="handleCurrentChange"
+      :page-size="searchList.size"
+      layout="prev, pager, next, jumper"
+      :total="tableData.total">
+    </el-pagination>
   </div>
 </template>
 <script>
@@ -50,18 +57,25 @@ import { findGood, deleteGood } from '@/api/products'
 export default {
   data () {
     return {
-      tableData: []
+      tableData: [],
+      searchList: {
+        start: 1,
+        size: 5
+      }
     }
   },
   methods: {
-    init () {
-      findGood().then(res => {
+    init (search = {}) {
+      findGood(search).then(res => {
         this.tableData = res.data.data
       })
     },
+    handleCurrentChange (current) {
+      this.searchList.start = current
+      this.init(this.searchList)
+    },
     handleClick (row) {
       deleteGood({id: row._id}).then(res => {
-        console.log(res)
         this.$message.warning(`被删除的商品是:${row.name}----${row._id}`)
         this.init()
       })
@@ -76,7 +90,7 @@ export default {
     }
   },
   created () {
-    this.init()
+    this.init(this.searchList)
   }
 }
 </script>

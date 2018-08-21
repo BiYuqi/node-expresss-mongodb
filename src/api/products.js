@@ -16,10 +16,10 @@ export const addGood = (param) => {
   })
 }
 
-export const findGood = (param) => {
+export const findGood = (params) => {
   return request({
     url: '/product/find',
     method: 'get',
-    data: param
+    params
   })
 }

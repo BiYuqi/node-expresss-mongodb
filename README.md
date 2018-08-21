@@ -69,4 +69,5 @@ const service = axios.create({
 - [x] 拆分api,增加controllers模块
 - [ ] 图片上传，服务器支持七牛
 - [ ] 尝试分片上传，分类上传
+- [ ] jwt鉴权实现
 
