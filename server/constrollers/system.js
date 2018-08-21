@@ -33,15 +33,19 @@ module.exports = {
       }
     })
   },
-  create: (req, res) => {
+  register: (req, res) => {
     User.create(req.body, (err, user) => {
       if (err) {
-        res.json(err)
+        res.send({
+          status: 500,
+          data: err.errmsg
+        })
+      } else {
+        res.send({
+          status: 200,
+          data: user
+        })
       }
-      res.send({
-        status: 200,
-        success: true
-      })
     })
   },
   loginout: (req, res) => {

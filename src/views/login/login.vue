@@ -2,10 +2,10 @@
   <div class="login-wrap">
     <el-form :model="formItem" :rules="rules2" ref="ruleForm" class="login-main">
       <h3 class="login-title">登录系统</h3>
-      <el-form-item prop="account">
+      <el-form-item prop="username">
         <el-input type="text" class="el-input-mine" placeholder="username" v-model="formItem.username" auto-complete="off"></el-input>
       </el-form-item>
-      <el-form-item prop="pass">
+      <el-form-item prop="password">
         <el-input type="password" class="el-input-mine" placeholder="password" v-model="formItem.password"></el-input>
       </el-form-item>
       <el-select v-model="userRole" placeholder="请选择" class="role-class" @change="getRoleChange">
@@ -75,12 +75,14 @@ export default {
         username: [
           {
             validator: validAccount,
+            required: true,
             trigger: 'blur'
           }
         ],
         password: [
           {
             validator: validPass,
+            required: true,
             trigger: 'blur'
           }
         ]
@@ -133,11 +135,11 @@ export default {
         return
       }
       userRegister(this.registerInfo).then((res) => {
-        if (res.data.status === 200) {
+        if (res.data && res.data.status === 200) {
           this.$message.info('注册成功，请登录!')
           this.dialogVisible = false
         } else {
-          this.$message.error('注册失败，请重试!')
+          this.$message.error('注册失败，请重试! s%', res.data)
         }
       })
     },

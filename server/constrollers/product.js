@@ -1,7 +1,12 @@
 const Product = require('../models/product')
 module.exports = {
-  find: (req, res, next) => {
-    Product.find(req.query).then(goods => {
+  find: (req, res) => {
+    // 支持模糊查询
+    let query = {}
+    Object.keys(req.query).forEach(item => {
+      query[item] = new RegExp(req.query[item])
+    })
+    Product.find(query).then(goods => {
       res.send({
         status: 200,
         data: goods
@@ -15,7 +20,7 @@ module.exports = {
       })
     })
   },
-  insert: (req, res, next) => {
+  insert: (req, res) => {
     Product.create(req.body, (err, good) => {
       if (err) {
         res.send({

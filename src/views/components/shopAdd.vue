@@ -9,6 +9,7 @@
         action="http://localhost:7085/upload/upload"
         :on-success="handleSuccess"
         :on-remove="handleRemove"
+        :before-upload="beforeAvatarUpload"
         :file-list="formList.fileList"
         name="GOODS"
         list-type="picture">
@@ -82,6 +83,18 @@ export default {
         name: response.data.originalname,
         path: response.data.path
       })
+    },
+    beforeAvatarUpload (file) {
+      const isJPG = file.type === ('image/jpeg' || 'image/png')
+      const isLt2M = file.size / 1024 / 1024 < 0.5
+
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG或者png 格式!')
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 500kb!')
+      }
+      return isJPG && isLt2M
     }
   }
 }

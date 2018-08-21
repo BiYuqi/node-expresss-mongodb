@@ -29,7 +29,7 @@ export const baseRoute = [
   },
   {
     path: '/icon',
-    title: '分类管理',
+    title: '系统设置',
     name: 'icon',
     icon: 'icon',
     component: Main,
@@ -38,7 +38,7 @@ export const baseRoute = [
         path: 'class-list',
         name: 'class-list',
         meta: {
-          title: '商品分类列表'
+          title: '用户创建'
         },
         component: () => import('@/views/icon-page/index.vue')
       },
@@ -46,7 +46,7 @@ export const baseRoute = [
         path: 'class-add',
         name: 'class-add',
         meta: {
-          title: '商品分类增加'
+          title: '全局设置'
         },
         component: () => import('@/views/icon-page/index.vue')
       }
