@@ -66,8 +66,9 @@ export default {
     add (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          this.formList.date = this.format('HH-MM-DD hh:mm:ss', this.formList.date)
           addGood(this.formList).then(res => {
-            this.$message.info('新增成功')
+            this.$message.info(res.data.message)
             this.$refs[formName].resetFields()
           })
         } else {
@@ -85,7 +86,7 @@ export default {
       })
     },
     beforeAvatarUpload (file) {
-      const isJPG = file.type === ('image/jpeg' || 'image/png')
+      const isJPG = file.type === 'image/jpeg' || file.type === 'image/png'
       const isLt2M = file.size / 1024 / 1024 < 0.5
 
       if (!isJPG) {

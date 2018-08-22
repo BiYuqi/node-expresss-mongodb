@@ -1,4 +1,5 @@
 const User = require('../models/users')
+const Msg = require('../utils/msg')
 module.exports = {
   login: (req, res) => {
     const {username, password} = req.body
@@ -8,63 +9,52 @@ module.exports = {
           if (user[i].username === username) {
             if (user[i].password === password) {
               req.session.sessionID = username
-              res.send({
-                status: 200,
-                data: {
-                  message: '登录成功',
+              Msg(res, 200, '登录成功',
+                {
                   userInfo: user
                 }
-              })
+              )
               break
             } else {
-              res.send({
-                status: 10006,
-                data: {
-                  message: '用户密码错误',
+              Msg(res, 10006, '用户密码错误',
+                {
                   userInfo: user
                 }
-              })
+              )
               break
             }
           }
         }
-        res.send({
-          status: 10000,
-          data: {
-            message: '用户不存在'
-          }
-        })
+        Msg(res, 10000, '用户不存在, 请注册')
       } else {
-        res.send({
-          status: 10000,
-          data: {
-            message: '用户不存在,请注册'
-          }
-        })
+        Msg(res, 10000, '用户不存在, 请注册')
       }
     })
   },
   register: (req, res) => {
     User.create(req.body, (err, user) => {
       if (err) {
-        res.send({
-          status: 500,
-          data: err.errmsg
-        })
+        Msg(res, 500, '用户创建失败',
+          {
+            data: err.errmsg
+          }
+        )
       } else {
-        res.send({
-          status: 200,
-          data: user
-        })
+        Msg(res, 200, '用户成功',
+          {
+            data: user
+          }
+        )
       }
     })
   },
   loginout: (req, res) => {
     req.session.sessionID = null
-    res.send({
-      status: 200,
-      success: true
-    })
+    Msg(res, 200, '退出成功',
+      {
+        data: true
+      }
+    )
   },
   userInfo: (req, res) => {
     if (req.query.role === 'admin') {

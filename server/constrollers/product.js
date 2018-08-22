@@ -1,66 +1,64 @@
 const Product = require('../models/product')
+const Msg = require('../utils/msg')
 module.exports = {
   find: (req, res) => {
     /**
      * 支持分页查询
      * 支持模糊查询
     */
-    let start = req.query.start || 1
-    let size = req.query.size || 10
-    let skip = (start * size) - size
-    let queryName = Object.keys(req.query)
-    let query = {}
+    const start = req.query.start || 1
+    const size = parseInt(req.query.size, 10) || 10
+    const skip = (start * size) - size
+    const queryName = Object.keys(req.query)
+    const query = {}
     for (let i = 0; i < queryName.length; i++) {
-      if (queryName[i] === 'start' || queryName[i] === 'size') {
-        continue
+      if (queryName[i] !== 'start' && queryName[i] !== 'size') {
+        query[queryName[i]] = new RegExp(req.query[queryName[i]], 'ig')
       }
-      query[queryName[i]] = new RegExp(req.query[queryName[i]])
     }
-    Product.find(query).skip(skip).limit(~~size).then(goods => {
+    Product.find(query).skip(skip).limit(size).then(goods => {
       Product.count(query).then(count => {
-        res.send({
-          status: 200,
-          data: {
+        Msg(res, 200, '查询成功',
+          {
             list: goods,
             total: count
           }
-        })
+        )
       })
     }).catch(e => {
-      res.send({
-        status: 500,
-        data: {
+      Msg(res, 500, '查询失败',
+        {
           message: e
         }
-      })
+      )
     })
   },
   insert: (req, res) => {
     Product.create(req.body, (err, good) => {
       if (err) {
-        res.send({
-          status: 1006,
-          data: {
-            message: '商品插入异常'
+        Msg(res, 1006, '商品插入异常',
+          {
+            message: err
           }
-        })
+        )
+        return
       }
-      res.send({
-        status: 200,
-        data: good
-      })
+      Msg(res, 200, '插入成功',
+        {
+          message: good
+        }
+      )
     })
   },
-  delete: (req, res, next) => {
+  delete: (req, res) => {
     Product.findOneAndRemove({
       _id: req.body.id
     }).then(good => {
-      res.send({
-        status: 200,
-        data: {
+      Msg(res, 200, '删除成功',
+        {
           message: good
         }
-      })
+      )
     })
   }
 }

@@ -113,10 +113,10 @@ export default {
           userLogin(this.formItem).then((res) => {
             if (res.data.status === 10000) {
               this.dialogVisible = true
-              this.$message.error(res.data.data.message)
+              this.$message.error(res.data.message)
             }
             if (res.data.status === 10006) {
-              this.$message.error(res.data.data.message)
+              this.$message.error(res.data.message)
               return
             }
             if (res.data.status === 200) {
@@ -143,7 +143,7 @@ export default {
           this.$message.info('注册成功，请登录!')
           this.dialogVisible = false
         } else {
-          this.$message.error('注册失败，请重试! s%', res.data)
+          this.$message.error('注册失败，请重试! s%', res.data.data)
         }
       })
     },

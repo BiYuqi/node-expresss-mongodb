@@ -1,10 +1,20 @@
 <template>
   <div class="shop-list">
+    <el-row :gutter="15">
+      <el-col :span="4">
+        <el-input v-model="searchList.name" placeholder="名称查询"></el-input>
+      </el-col>
+      <el-col :span="4">
+        <el-button type="primary" @click="search">查询</el-button>
+        <el-button type="default" @click="reset">重置</el-button>
+      </el-col>
+    </el-row>
     <el-table
       :data="tableData.list"
       style="width: 100%">
       <el-table-column
-        label="商品图片">
+        label="商品图片"
+        width="80">
         <template slot-scope="scope">
           <img width="45" height="30" :src="filterImgPath(scope.row)" alt="">
         </template>
@@ -48,7 +58,8 @@
       @current-change="handleCurrentChange"
       :page-size="searchList.size"
       layout="prev, pager, next, jumper"
-      :total="tableData.total">
+      :total="tableData.total"
+      style="margin: 20px 0">
     </el-pagination>
   </div>
 </template>
@@ -60,7 +71,8 @@ export default {
       tableData: [],
       searchList: {
         start: 1,
-        size: 5
+        size: 5,
+        name: ''
       }
     }
   },
@@ -87,6 +99,13 @@ export default {
       } else {
         return ''
       }
+    },
+    search () {
+      this.init(this.searchList)
+    },
+    reset () {
+      this.searchList.name = ''
+      this.init(this.searchList)
     }
   },
   created () {
