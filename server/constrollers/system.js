@@ -9,18 +9,10 @@ module.exports = {
           if (user[i].username === username) {
             if (user[i].password === password) {
               req.session.sessionID = username
-              Msg(res, 200, '登录成功',
-                {
-                  userInfo: user
-                }
-              )
+              Msg(res, 200, '登录成功')
               break
             } else {
-              Msg(res, 10006, '用户密码错误',
-                {
-                  userInfo: user
-                }
-              )
+              Msg(res, 10006, '用户密码错误')
               break
             }
           }
