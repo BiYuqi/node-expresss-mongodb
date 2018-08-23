@@ -40,33 +40,48 @@ server
   ---constrollers 业务逻辑
   ---models 数据模型(db)
   ---routes 路由api
-  ---upload 上传文件目录
+  ---upload 上传文件目录
   ---app.js 项目入口
-```
-### 本地起服务
-本地node服务端接口，server文件夹
-* 为本地node服务，本地npm run dev后，需要在server目录 node app 来启动本地服务，以便登录正常进行
-* 开发环境建议使用supervisor app 来启动服务，可以实时调试node，热更新
-* 以下为src/utils/request.js文件配置
-```js
-// 接口配置
-const BASE_URL = 'http://localhost:7085'
-const service = axios.create({
-  baseURL: BASE_URL,
-  timeout: 20000
-})
 ```
 
 ### 连接MongoDB
 <a href="http://www.runoob.com/mongodb/mongodb-window-install.html">请自行安装下载mongodb</a> <br/>
 <a href="http://www.runoob.com/mongodb/mongodb-connections.html">连接mongodb</a>
 
+### 启动mongoDb
+以下命令有先后执行顺序
+##### MAC平台
+打开 terminal 或者 iterm2 打开两个tab
+* 一个执行 mongod 回车
+* 一个执行 mongo 回车
+##### window平台
+在你的安装目录D:\Program Files\MongoDB\Server\4.0\bin下
+注意：
+window需要再安装根目录建立data文件夹存放数据D:\data\db
+建立一个data文件夹 => 然后建立一个db
+分别执行
+* mongod.exe
+* mongo.exe
+#### 项目中启动node server && 前端代码
+本地node服务端接口，server文件夹
+* 为本地node服务，本地npm run dev后，需要在server目录 node app 来启动本地服务，以便登录正常进行
+* 开发环境建议使用supervisor app 来启动服务，可以实时调试node，热更新
+* 以下为src/utils/request.js文件配置
+```js
+// node 服务暴露出的接口地址
+const BASE_URL = 'http://localhost:7085'
+const service = axios.create({
+  baseURL: BASE_URL,
+  timeout: 20000
+})
+```
 ### 问题
 * 项目使用npm i 安装依赖后，你npm run dev 可能会报错，这个时候需要 npm i node-sass sass-loader -D 来解决依赖问题
 * supervisor 必须全局安装才可以 npm i supervisor -g
 
 ### TODO
 - [x] 拆分api,增加controllers模块
+- [x] 接口查询已支持分页模糊查询
 - [ ] 图片上传，服务器支持七牛
 - [ ] 尝试分片上传，分类上传
 - [ ] jwt鉴权实现
