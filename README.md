@@ -17,7 +17,7 @@
 > 基于vue2.x + element-ui + node + express + mongodb 的简约商品管理,主要练习文件上传，接口编写，发布
 
 
-### 本地跑项目
+## Download
 
 ``` bash
 #  download
@@ -33,7 +33,7 @@ npm run dev
 # build for production with minification
 npm run build
 ```
-### server架构
+## server架构
 ```html
 server
   ---config 系统配置
@@ -44,22 +44,23 @@ server
   ---app.js 项目入口
 ```
 
-### 连接MongoDB
-<a href="http://www.runoob.com/mongodb/mongodb-window-install.html">请自行安装下载mongodb</a> <br/>
-<a href="http://www.runoob.com/mongodb/mongodb-connections.html">连接mongodb</a>
+## Download MongoDB
+<a href="http://www.runoob.com/mongodb/mongodb-window-install.html">请自行安装下载MongoDB</a> <br/>
+<a href="http://www.runoob.com/mongodb/mongodb-connections.html">连接MongoDB</a>
 
-### 启动mongoDb
+## Start MongoDB
 以下命令有先后执行顺序
-##### MAC平台
+#### MAC Platform
 打开 terminal 或者 iterm2 打开两个tab
 * 一个执行 mongod 回车
 * 一个执行 mongo 回车
-##### window平台
+#### window Platform
 在你的安装目录D:\Program Files\MongoDB\Server\4.0\bin下
-注意：
-window需要再安装根目录建立data文件夹存放数据D:\data\db
-建立一个data文件夹 => 然后建立一个db
-分别执行
+**注意:**
+* window需要再安装根目录建立data文件夹存放数据D:\data\db
+* 建立一个data文件夹 => 然后建立一个db
+
+**分别执行**
 * mongod.exe
 * mongo.exe
 #### 项目中启动node server && 前端代码
@@ -75,7 +76,7 @@ const service = axios.create({
   timeout: 20000
 })
 ```
-### 问题
+## 问题
 * 项目使用npm i 安装依赖后，你npm run dev 可能会报错，这个时候需要 npm i node-sass sass-loader -D 来解决依赖问题
 * supervisor 必须全局安装才可以 npm i supervisor -g
 
