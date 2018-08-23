@@ -54,11 +54,7 @@ module.exports = {
     Product.findOneAndRemove({
       _id: req.body.id
     }).then(good => {
-      Msg(res, 200, '删除成功',
-        {
-          message: good
-        }
-      )
+      Msg(res, 200, '删除成功')
     })
   }
 }
