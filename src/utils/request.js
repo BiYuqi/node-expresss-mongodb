@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Cookie from 'js-cookie'
 import { Message } from 'element-ui'
 
 // base setting
@@ -10,7 +11,7 @@ const service = axios.create({
 
 service.interceptors.request.use(config => {
   config.headers['Content-Type'] = 'application/json; charset=UTF-8'
-  // config.headers['Authorization'] = localStorage.getItem('token')
+  config.headers['Authorization'] = Cookie.get('uut') || ''
   return config
 }, error => {
   Promise.reject(error)
@@ -22,7 +23,6 @@ service.interceptors.response.use(response => {
   */
   const res = response.data
   if (res.code === 401) {
-    console.log('账户登录失效')
     Message({
       message: res.message,
       type: 'error',
@@ -31,7 +31,6 @@ service.interceptors.response.use(response => {
   }
   return response
 }, error => {
-  console.log(error)
   Message({
     message: error.message,
     type: 'error',

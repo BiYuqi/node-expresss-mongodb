@@ -1,62 +1,80 @@
+const jwt = require('jsonwebtoken')
 const User = require('../models/users')
-const Msg = require('../utils/msg')
+const CONFIG = require('../config/config')
 module.exports = {
   login: (req, res) => {
     const {username, password} = req.body
-    User.find().then((user) => {
+    User.find({}).then((user) => {
       if (user && user.length > 0) {
         for (let i = 0; i < user.length; i++) {
           if (user[i].username === username) {
             if (user[i].password === password) {
               req.session.sessionID = username
-              Msg(res, 200, '登录成功')
-              break
+              const info = Object.assign({}, user[i], {loginAt: +new Date()})
+              const token = jwt.sign(info, CONFIG.user_token_name, {expiresIn: '2h'})
+              return res.send({
+                code: 200,
+                message: '登录成功',
+                data: {
+                  token
+                }
+              })
             } else {
-              Msg(res, 10006, '用户密码错误')
-              break
+              return res.send({
+                code: 10006,
+                message: '用户密码错误',
+                data: null
+              })
             }
           }
         }
-        Msg(res, 10000, '用户不存在, 请注册')
       } else {
-        Msg(res, 10000, '用户不存在, 请注册')
+        return res.send({
+          code: 10000,
+          message: '用户不存在, 请注册',
+          data: null
+        })
       }
     })
   },
   register: (req, res) => {
     User.create(req.body, (err, user) => {
       if (err) {
-        Msg(res, 500, '用户创建失败',
-          {
-            data: err.errmsg
-          }
-        )
+        return res.send({
+          code: 500,
+          message: '用户创建失败',
+          data: err.errmsg
+        })
       } else {
-        Msg(res, 200, '用户成功',
-          {
-            data: user
-          }
-        )
+        return res.send({
+          code: 200,
+          message: '用户成功',
+          data: user
+        })
       }
     })
   },
   loginout: (req, res) => {
     req.session.sessionID = null
-    Msg(res, 200, '退出成功',
-      {
-        data: true
-      }
-    )
+    return res.send({
+      code: 200,
+      message: '退出成功',
+      data: true
+    })
   },
   userInfo: (req, res) => {
     if (req.query.role === 'admin') {
-      res.json({
+      return res.send({
+        code: 200,
+        message: '获取成功',
         data: {
           role: ['admin']
         }
       })
     } else {
-      res.json({
+      return res.sendStatus(200).send({
+        code: 200,
+        message: '获取成功',
         data: {
           role: ['user']
         }

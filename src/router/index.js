@@ -55,6 +55,7 @@ router.beforeEach((to, from, next) => {
           setTimeout(() => {
             Cookie.remove('user')
             Cookie.remove('role')
+            Cookie.remove('uut')
             store.commit('clearAllTags')
             store.commit('user/RESET_ROLE') // 清除角色
             store.commit('permiss/RM_ROUTES') // 清空routes for sidebar

@@ -6,7 +6,7 @@ module.exports = {
     const mimetype = file.mimetype
     const originalname = file.originalname
     res.send({
-      status: 200,
+      code: 200,
       data: {
         message: '上传成功',
         size,

@@ -1,5 +1,4 @@
 const Product = require('../models/product')
-const Msg = require('../utils/msg')
 module.exports = {
   find: (req, res) => {
     /**
@@ -18,43 +17,54 @@ module.exports = {
     }
     Product.find(query).skip(skip).limit(size).then(goods => {
       Product.count(query).then(count => {
-        Msg(res, 200, '查询成功',
-          {
+        return res.send({
+          code: 200,
+          message: '查询成功',
+          data: {
             list: goods,
             total: count
           }
-        )
+        })
       })
     }).catch(e => {
-      Msg(res, 500, '查询失败',
-        {
+      return res.send({
+        code: 500,
+        message: '查询失败',
+        data: {
           message: e
         }
-      )
+      })
     })
   },
   insert: (req, res) => {
     Product.create(req.body, (err, good) => {
       if (err) {
-        Msg(res, 1006, '商品插入异常',
-          {
+        return res.send({
+          code: 1006,
+          message: '商品插入异常',
+          data: {
             message: err
           }
-        )
-        return
+        })
       }
-      Msg(res, 200, '插入成功',
-        {
+      return res.send({
+        code: 200,
+        message: '插入成功',
+        data: {
           message: good
         }
-      )
+      })
     })
   },
   delete: (req, res) => {
     Product.findOneAndRemove({
       _id: req.body.id
     }).then(good => {
-      Msg(res, 200, '删除成功')
+      return res.send({
+        code: 200,
+        message: '删除成功',
+        data: null
+      })
     })
   }
 }

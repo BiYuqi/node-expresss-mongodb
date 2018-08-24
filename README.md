@@ -50,19 +50,23 @@ server
 
 ## Start MongoDB
 以下命令有先后执行顺序
-#### MAC Platform
+#### MAC
+```js
 打开 terminal 或者 iterm2 打开两个tab
 * 一个执行 mongod 回车
 * 一个执行 mongo 回车
-#### window Platform
+```
+#### window
+```js
 在你的安装目录D:\Program Files\MongoDB\Server\4.0\bin下
-**注意:**
-* window需要再安装根目录建立data文件夹存放数据D:\data\db
-* 建立一个data文件夹 => 然后建立一个db
+注意:
+window需要再安装根目录建立data文件夹存放数据D:\data\db
+建立一个data文件夹 => 然后建立一个db
 
-**分别执行**
-* mongod.exe
-* mongo.exe
+分别执行(双击)
+mongod.exe
+mongo.exe
+```
 #### 项目中启动node server && 前端代码
 本地node服务端接口，server文件夹
 * 为本地node服务，本地npm run dev后，需要在server目录 node app 来启动本地服务，以便登录正常进行
@@ -85,5 +89,5 @@ const service = axios.create({
 - [x] 接口查询已支持分页模糊查询
 - [ ] 图片上传，服务器支持七牛
 - [ ] 尝试分片上传，分类上传
-- [ ] jwt鉴权实现
+- [x] jwt鉴权初步实现
 

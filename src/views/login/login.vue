@@ -111,17 +111,18 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           userLogin(this.formItem).then((res) => {
-            if (res.data.status === 10000) {
+            if (res.data.code === 10000) {
               this.dialogVisible = true
               this.$message.error(res.data.message)
             }
-            if (res.data.status === 10006) {
+            if (res.data.code === 10006) {
               this.$message.error(res.data.message)
               return
             }
-            if (res.data.status === 200) {
+            if (res.data.code === 200) {
               Cookie.set('user', this.formItem.username)
               Cookie.set('role', this.userRole)
+              Cookie.set('uut', res.data.data.token)
               this.$router.push({
                 name: 'shop-list'
               })
