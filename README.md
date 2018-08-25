@@ -43,6 +43,18 @@ server
   ---upload 上传文件目录
   ---app.js 项目入口
 ```
+```js
+// 依赖
+express
+body-parser
+cookie-parser
+multer
+mongoose
+connect-mongo // 暂未用到
+jsonwebtoken
+ioredis // 暂未用到
+qn // 暂未用到
+```
 
 ## Download MongoDB
 <a href="http://www.runoob.com/mongodb/mongodb-window-install.html">请自行安装下载MongoDB</a> <br/>
