@@ -124,7 +124,7 @@ export default {
               Cookie.set('role', this.userRole)
               Cookie.set('uut', res.data.data.token)
               this.$router.push({
-                name: 'shop-list'
+                name: 'dashboard'
               })
             }
           }).catch((err) => {
