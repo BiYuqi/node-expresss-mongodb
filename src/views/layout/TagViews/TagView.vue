@@ -1,16 +1,15 @@
 <template lang="html">
   <div class="tag-wrap" v-if="headVisetedShow && tagList.length > 0">
-    <router-link :to="items.path" :key="items.path" class="tag-view" v-for="items in tagList">
-      <el-tag
-        :key="items.name"
-        @click.native="tagClick(items)"
-        closable
-        :class="{'current': items.name === currentPageName}"
-        @close.prevent="close(items.name)"
-        :type="items.type" class="tag">
-        {{items.meta.title}}
-      </el-tag>
-    </router-link>
+    <el-tag
+      :key="items.name"
+      v-for="items in tagList"
+      @click.native="tagClick(items)"
+      closable
+      :class="{'current': items.name === currentPageName}"
+      @close.prevent="close(items.name)"
+      :type="items.type" class="tag">
+      {{items.meta.title}}
+    </el-tag>
   </div>
 </template>
 
@@ -30,6 +29,7 @@ export default {
       const arg = item.arg
       const query = item.query
       // tagvisited 触发左侧边栏展开
+
       const flag = filterName(baseRoute, name)
       if (flag) {
         EventBus.$emit('openSidebar', flag)
@@ -95,8 +95,16 @@ export default {
   .tag{
     cursor: pointer;
   }
-  .tag-view{
-    .current{
+  .el-tag{
+    border-radius: 0;
+    margin: 0 2px;
+    border: 1px solid #eee;
+    color: #495060;
+    height: 26px;
+    line-height: 26px;
+    background-color: #fff;
+    transition: all .2s;
+    &.current{
       background-color: #409EFF;
       color: #fff !important;
       border-color: #409EFF;
@@ -118,16 +126,6 @@ export default {
         color: #fff;
       }
     }
-  }
-  .el-tag{
-    border-radius: 0;
-    margin: 0 2px;
-    border: 1px solid #eee;
-    color: #495060;
-    height: 26px;
-    line-height: 26px;
-    background-color: #fff;
-    transition: all .2s;
     .el-icon-close{
       font-size: 10px;
       transform: scale(.6);
