@@ -27,11 +27,11 @@ cd node-expresss-mongodb
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
+# local start web-page
 npm run dev
 
-# build for production with minification
-npm run build
+# local start server
+npm run app
 ```
 ## server架构
 ```html
@@ -90,4 +90,5 @@ const service = axios.create({
 - [ ] 图片上传，服务器支持七牛
 - [ ] 尝试分片上传，分类上传
 - [x] jwt鉴权初步实现
+- [ ] redis实践数据缓存，接口缓存
 
