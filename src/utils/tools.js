@@ -59,3 +59,10 @@ export const filterName = (routes, name) => {
   }
   return false
 }
+// 防止接口请求报错
+export const chaining = (data, comp, def = '') => {
+  const sp = comp.split('.')
+  return sp.reduce((prev, next, index) => {
+    return prev && prev[next]
+  }, data) || def
+}

@@ -31,7 +31,8 @@ npm install
 npm run dev
 
 # local start server
-npm run app
+cd server
+supervisor app
 ```
 ## server架构
 ```html
@@ -54,6 +55,10 @@ connect-mongo // 暂未用到
 jsonwebtoken
 ioredis // 暂未用到
 qn // 暂未用到
+```
+```js
+// ioredis qn 暂未用到
+npm i express body-parser cookie-parser multer mongoose connect-mongo jsonwebtoken ioredis qn
 ```
 
 ## Download MongoDB
@@ -95,12 +100,13 @@ const service = axios.create({
 ## 问题
 * 项目使用npm i 安装依赖后，你npm run dev 可能会报错，这个时候需要 npm i node-sass sass-loader -D 来解决依赖问题
 * supervisor 必须全局安装才可以 npm i supervisor -g
+* 如果不是在server目录下启动 supervisor app 会导致上传文件目录报错，具体可进routes/upload.js进行修改
 
 ### TODO
 - [x] 拆分api,增加controllers模块
 - [x] 接口查询已支持分页模糊查询
+- [x] jwt鉴权初步实现
 - [ ] 图片上传，服务器支持七牛
 - [ ] 尝试分片上传，分类上传
-- [x] jwt鉴权初步实现
 - [ ] redis实践数据缓存，接口缓存
 

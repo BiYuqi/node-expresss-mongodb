@@ -9,6 +9,9 @@ const checkToken = require('./middleware/checkToken')
 const CONFIG = require('./config/config')
 const app = express()
 
+// upload file static path
+app.use('/upload', express.static('upload'))
+
 app.use(session({
   secret: CONFIG.session_secret,
   resave: true,
@@ -27,14 +30,13 @@ app.all('*', (req, res, next) => {
     next()
   }
 })
-// 上传的图片地址
-app.use('/upload', express.static('upload'))
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
-
+// check token
 app.use(checkToken)
 
-// 接口
+// api
 app.use('/', index)
 app.use('/product', product)
 app.use('/system', system)

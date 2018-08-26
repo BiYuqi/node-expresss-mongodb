@@ -54,6 +54,7 @@
       </el-table-column>
     </el-table>
     <el-pagination
+      v-if="chaining(tableData.list, 'length', false)"
       background
       @current-change="handleCurrentChange"
       :page-size="searchList.size"

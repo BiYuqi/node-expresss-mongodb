@@ -8,12 +8,13 @@ import ElementUi from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 import SvgIcon from '@/components/SvgIcon'
-import { format } from '@/utils/tools'
+import { format, chaining } from '@/utils/tools'
 // 全局svg图标组件 使用方法
 Vue.component('svg-icon', SvgIcon)
 
 Vue.config.productionTip = false
 Vue.prototype.format = format
+Vue.prototype.chaining = chaining
 Vue.use(ElementUi)
 
 /* eslint-disable no-new */

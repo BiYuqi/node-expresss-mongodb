@@ -11,7 +11,8 @@ module.exports = {
             if (user[i].password === password) {
               req.session.sessionID = username
               const info = Object.assign({}, user[i], {loginAt: +new Date()})
-              const token = jwt.sign(info, CONFIG.user_token_name, {expiresIn: '1h'})
+              // 过期时间2小时
+              const token = jwt.sign(info, CONFIG.user_token_name, {expiresIn: '2h'})
               return res.send({
                 code: 200,
                 message: '登录成功',

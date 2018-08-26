@@ -27,7 +27,7 @@ router.beforeEach((to, from, next) => {
     })
   } else if (Cookie.get('user') && to.name === 'login') {
     next({
-      name: 'dashboard_index'
+      name: 'dashboard'
     })
   } else {
     /**
@@ -57,7 +57,6 @@ router.beforeEach((to, from, next) => {
             Cookie.remove('role')
             Cookie.remove('uut')
             store.commit('clearAllTags')
-            store.commit('user/RESET_ROLE') // 清除角色
             store.commit('permiss/RM_ROUTES') // 清空routes for sidebar
             localStorage.removeItem('pageOpenedList')
             setTimeout(() => {

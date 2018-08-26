@@ -11,6 +11,7 @@
         :on-remove="handleRemove"
         :before-upload="beforeAvatarUpload"
         :file-list="formList.fileList"
+        :headers="headers"
         name="GOODS"
         list-type="picture">
         <el-button size="small" type="primary">点击上传</el-button>
@@ -36,6 +37,7 @@
 </template>
 <script>
 import { addGood } from '@/api/products'
+import Cookie from 'js-cookie'
 export default {
   data () {
     return {
@@ -45,6 +47,9 @@ export default {
         price: '',
         date: '',
         isShow: false
+      },
+      headers: {
+        Authorization: Cookie.get('uut')
       },
       rules: {
         name: [
