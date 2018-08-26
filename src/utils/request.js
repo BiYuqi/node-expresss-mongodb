@@ -23,7 +23,6 @@ service.interceptors.response.use(response => {
   * 这里可以做接口相关的拦截设置
   */
   const res = response.data
-  console.log(res)
   if (res.code === 401) {
     Message({
       message: res.data,

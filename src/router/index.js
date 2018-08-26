@@ -10,7 +10,7 @@ import store from '@/store'
 import errPage from '@/utils/404'
 Vue.use(Router)
 export const router = new Router({
-  // mode: 'history',
+  mode: 'history',
   routes: routes
 })
 
