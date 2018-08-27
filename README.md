@@ -38,8 +38,10 @@ supervisor app
 ## server架构
 ```html
 server
+  ---common 公用模块
   ---config 系统配置
   ---constrollers 业务逻辑
+  ---middleware 中间件
   ---models 数据模型(db)
   ---routes 路由api
   ---upload 上传文件目录
