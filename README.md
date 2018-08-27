@@ -14,7 +14,7 @@
 	</a>
 </p>
 
-> 基于vue2.x + element-ui + node + express + mongodb 的简约商品管理,主要练习文件上传，接口编写，发布
+> 基于vue2.x + element-ui + node + express + mongodb 前后端分离的简约商品管理,主要练习文件上传，接口编写，发布服务等
 
 
 ## Download
@@ -31,6 +31,7 @@ npm install
 npm run dev
 
 # local start server
+npm i supervisor -g
 cd server
 supervisor app
 ```
@@ -76,13 +77,13 @@ npm i express body-parser cookie-parser multer mongoose connect-mongo jsonwebtok
 #### window
 ```js
 在你的安装目录D:\Program Files\MongoDB\Server\4.0\bin下
-注意:
-window需要再安装根目录建立data文件夹存放数据D:\data\db
-建立一个data文件夹 => 然后建立一个db
-
 分别执行(双击)
 mongod.exe
 mongo.exe
+
+注意:
+window需要再安装根目录建立data文件夹存放数据D:\data\db
+建立一个data文件夹 => 然后建立一个db文件夹
 ```
 #### 项目中启动node server && 前端代码
 本地node服务端接口，server文件夹
@@ -97,10 +98,10 @@ const service = axios.create({
   timeout: 20000
 })
 ```
-## 问题
+## 注意事项
 * 项目使用npm i 安装依赖后，你npm run dev 可能会报错，这个时候需要 npm i node-sass sass-loader -D 来解决依赖问题
 * supervisor 必须全局安装才可以 npm i supervisor -g
-* 如果不是在server目录下启动 supervisor app 会导致上传文件目录报错，具体可进routes/upload.js进行修改
+* 如果不是在server目录下启动 supervisor app 会导致上传文件目录报错，具体可进server/routes/upload.js进行修改(暂不建议修改)
 
 ### TODO
 - [x] 拆分api,增加controllers模块
