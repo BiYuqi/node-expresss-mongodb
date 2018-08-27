@@ -34,14 +34,11 @@ service.interceptors.response.use(response => {
     Cookie.remove('uut')
     Cookie.remove('cid')
     localStorage.removeItem('pageOpenedList')
-    store.commit('clearAllTags')
-    store.commit('user/RESET_ROLE') // 清除角色
-    store.commit('permiss/RM_ROUTES') // 清空routes for sidebar
     setTimeout(() => {
       userLoginout().then(res => {
         location.reload()
       })
-    }, 3000)
+    }, 2000)
   }
   return response
 }, error => {
