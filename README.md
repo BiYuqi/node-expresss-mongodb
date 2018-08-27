@@ -59,7 +59,7 @@ qn // 暂未用到
 ```
 ```js
 // ioredis qn 暂未用到
-npm i express body-parser cookie-parser multer mongoose connect-mongo jsonwebtoken ioredis qn
+npm i express body-parser cookie-parser multer mongoose connect-mongo jsonwebtoken ioredis qn -S
 ```
 
 ## Download MongoDB
