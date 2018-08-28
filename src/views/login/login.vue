@@ -16,6 +16,9 @@
           :value="item.value">
         </el-option>
       </el-select>
+      <div class="register-btn">
+        <el-tag size="small" type="info" @click.native="registerFun">注册</el-tag>
+      </div>
       <el-button type="primary" style="width:100%;" @click="loginIn('ruleForm')">登录</el-button>
     </el-form>
     <!-- modal -->
@@ -23,23 +26,29 @@
       title="注册"
       :visible.sync="dialogVisible"
       width="30%">
-      <el-input
-        type="text"
-        class="el-input-register"
-        placeholder="username"
-        v-model="registerInfo.username"
-        auto-complete="off">
-      </el-input>
-      <el-input
-        type="text"
-        class="el-input-register"
-        placeholder="password"
-        v-model="registerInfo.password"
-        auto-complete="off">
-      </el-input>
+      <el-form :model="registerInfo" :rules="rules2" ref="registerForm">
+        <el-form-item prop="username">
+          <el-input
+            type="text"
+            class="el-input-register"
+            placeholder="username"
+            v-model="registerInfo.username"
+            auto-complete="off">
+          </el-input>
+        </el-form-item>
+        <el-form-item prop="password">
+          <el-input
+            type="text"
+            class="el-input-register"
+            placeholder="password"
+            v-model="registerInfo.password"
+            auto-complete="off">
+          </el-input>
+        </el-form-item>
+      </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="registerBtn">创建用户</el-button>
+        <el-button type="primary" @click="registerBtn('registerForm')">创建用户</el-button>
       </span>
     </el-dialog>
   </div>
@@ -135,16 +144,22 @@ export default {
         }
       })
     },
-    registerBtn () {
-      if (!this.registerInfo.username || !this.registerInfo.password) {
-        return
-      }
-      userRegister(this.registerInfo).then((res) => {
-        if (res.data && res.data.status === 200) {
-          this.$message.info('注册成功，请登录!')
-          this.dialogVisible = false
-        } else {
-          this.$message.error('注册失败，请重试! s%', res.data.data)
+    registerFun () {
+      this.dialogVisible = true
+    },
+    registerBtn (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          userRegister(this.registerInfo).then((res) => {
+            if (res.data && res.data.code === 200) {
+              this.$message.info('注册成功，请登录!')
+              this.dialogVisible = false
+            } else {
+              this.$message.error('注册失败，请重试! %s', res.data.data)
+            }
+          }).catch((err) => {
+            console.log(err)
+          })
         }
       })
     },

@@ -4,36 +4,26 @@ const CONFIG = require('../config/config')
 module.exports = {
   login: (req, res) => {
     const {username, password} = req.body
-    User.find({}).then((user) => {
+    User.find({username}).then((user) => {
       if (user && user.length > 0) {
-        for (let i = 0; i < user.length; i++) {
-          if (user[i].username === username) {
-            if (user[i].password === password) {
-              req.session.sessionID = username
-              const info = Object.assign({}, user[i], {loginAt: +new Date()})
-              // 过期时间2小时
-              const token = jwt.sign(info, CONFIG.user_token_name, {expiresIn: '2h'})
-              return res.send({
-                code: 200,
-                message: '登录成功',
-                data: {
-                  token
-                }
-              })
-            } else {
-              return res.send({
-                code: 10006,
-                message: '用户密码错误',
-                data: null
-              })
+        if (user[0].password === password) {
+          req.session.sessionID = username
+          const info = Object.assign({}, req.body, {loginAt: +new Date()})
+          // 过期时间2小时
+          const token = jwt.sign(info, CONFIG.user_token_name, {expiresIn: '2h'})
+          return res.send({
+            code: 200,
+            message: '登录成功',
+            data: {
+              token
             }
-          } else {
-            return res.send({
-              code: 10000,
-              message: '用户不存在, 请注册',
-              data: null
-            })
-          }
+          })
+        } else {
+          return res.send({
+            code: 10006,
+            message: '用户密码错误',
+            data: null
+          })
         }
       } else {
         return res.send({

@@ -34,4 +34,14 @@
   .el-input-register{
     margin: 15px 0;
   }
+  .register-btn{
+    text-align: right;
+    margin: 4px auto;
+    cursor:pointer;
+    &:hover{
+      .el-tag--info{
+        color: #c6c8cc;
+      }
+    }
+  }
 }
