@@ -4,7 +4,7 @@ const CONFIG = require('../config/config')
 module.exports = (req, res, next) => {
   let path = req.path
   // jump check
-  if (path === '/system/login') {
+  if (path === '/system/login' || path === '/system/register') {
     return next()
   }
   const token = req.headers.authorization
