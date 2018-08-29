@@ -1,10 +1,10 @@
 const jwt = require('jsonwebtoken')
 const CONFIG = require('../config/config')
-
+const checkPath = require('../common/serverFilters')
 module.exports = (req, res, next) => {
   let path = req.path
-  // jump check
-  if (path === '/system/login' || path === '/system/register') {
+  // 跳过token验证
+  if (checkPath(path)) {
     return next()
   }
   const token = req.headers.authorization
