@@ -69,7 +69,7 @@ module.exports = {
         }
       })
     } else {
-      return res.sendStatus(200).send({
+      return res.status(200).send({
         code: 200,
         message: '获取成功',
         data: {
