@@ -32,8 +32,7 @@ npm run dev
 
 # local start server
 npm i supervisor -g
-cd server
-supervisor app
+npm run app
 ```
 ## server架构
 ```html
@@ -48,45 +47,55 @@ server
   ---app.js 项目入口
 ```
 ```js
-// 依赖
+// server主要依赖
 express
 body-parser
 cookie-parser
 multer
 mongoose
-connect-mongo // 暂未用到
+connect-mongo
 jsonwebtoken
-ioredis // 暂未用到
-qn // 暂未用到
-```
-```js
-// ioredis qn 暂未用到
-npm i express body-parser cookie-parser multer mongoose connect-mongo jsonwebtoken ioredis qn -S
+ioredis
+qn
 ```
 
-## Download MongoDB
-<a href="http://www.runoob.com/mongodb/mongodb-window-install.html">请自行安装下载MongoDB</a> <br/>
-<a href="http://www.runoob.com/mongodb/mongodb-connections.html">连接MongoDB</a>
+## 下载并安装Mongodb
+<a href="https://www.mongodb.com/download-center#community">请自行安装下载MongoDB</a> <br/>
 
-## Start MongoDB
-以下命令有先后执行顺序
-#### MAC
+**window平台注意事项：**
+
+MongoDB的数据存储在data目录的db目录下，但是这个目录在安装过程不会自动创建，所以你需要手动创建data目录，并在data目录中创建db目录。
+比如我的mongodb安装在了D盘，那么在安装目录创建上述文件夹比如D:\data\db
+
+**mac平台安装：**
+以下如果安装失败，请在命令前加sudo
 ```js
+// sudo brew install mongodb
+// 安装mongodb
+brew install mongodb
+// 创建数据库
+mkdir -p /data/db
+```
+
+
+## 启动Mongodb
+> 以下平台具体命令有先后执行顺序
+
+**MAC**
+
 打开 terminal 或者 iterm2 打开两个tab
-* 一个执行 mongod 回车
-* 一个执行 mongo 回车
-```
-#### window
-```js
-在你的安装目录D:\Program Files\MongoDB\Server\4.0\bin下
-分别执行(双击)
-mongod.exe
-mongo.exe
 
-注意:
-window需要再安装根目录建立data文件夹存放数据D:\data\db
-建立一个data文件夹 => 然后建立一个db文件夹
-```
+* 一个输入 mongod 回车
+* 一个输入 mongo 回车
+
+**Window**
+
+在你的安装目录D:\Program Files\MongoDB\Server\4.0\bin下,分别执行(双击)
+* mongod.exe
+* mongo.exe
+
+<hr />
+
 #### 项目中启动node server && 前端代码
 本地node服务端接口，server文件夹
 * 为本地node服务，本地npm run dev后，需要在server目录 node app 来启动本地服务，以便登录正常进行
@@ -100,6 +109,8 @@ const service = axios.create({
   timeout: 20000
 })
 ```
+<hr />
+
 ## 注意事项
 * 项目使用npm i 安装依赖后，你npm run dev 可能会报错，这个时候需要 npm i node-sass sass-loader -D 来解决依赖问题
 * supervisor 必须全局安装才可以 npm i supervisor -g
